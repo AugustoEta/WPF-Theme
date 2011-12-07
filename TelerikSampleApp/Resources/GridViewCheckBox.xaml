@@ -1,0 +1,49 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					
+				
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"     
+					xmlns:grid="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:treelist="clr-namespace:Telerik.Windows.Controls.TreeListView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+>
+	
+<telerik:MetroColors x:Key="MetroColors"/>
+<SolidColorBrush x:Key="BasicBrush" telerik:MetroColors.Color="Basic" />
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="StrongBrush" telerik:MetroColors.Color="Strong" />
+<SolidColorBrush x:Key="AccentBrush" telerik:MetroColors.Color="Accent" />
+
+	
+	<ControlTemplate x:Key="GridViewCheckBoxTemplate" TargetType="grid:GridViewCheckBox">
+		<Grid HorizontalAlignment="Left" VerticalAlignment="Center" Width="13" Height="13">
+			
+			<Border BorderBrush="{StaticResource BasicBrush}" Background="{StaticResource MainBrush}" BorderThickness="1">
+				<Grid>
+					<Path x:Name="IndeterminatePath" Data="M14.708333,144.5 L20.667,144.5" HorizontalAlignment="Center" Height="7"  Stretch="Fill" Stroke="{StaticResource StrongBrush}" StrokeThickness="1" Visibility="Collapsed" VerticalAlignment="Center" Width="7"/>
+					<Rectangle  x:Name="CheckedPath" StrokeThickness="2" Stroke="{StaticResource MainBrush}" Fill="{StaticResource AccentBrush}" Visibility="Collapsed"/>
+				</Grid>
+			</Border>
+
+		</Grid>
+		
+		<ControlTemplate.Triggers>
+
+			<Trigger Property="IsChecked" Value="True">
+				<Setter TargetName="CheckedPath"  Property="Visibility" Value="Visible" />
+			</Trigger>
+			<Trigger Property="IsThreeState" Value="True">
+				<Setter TargetName="IndeterminatePath"  Property="Visibility" Value="Visible" />
+			</Trigger>
+		</ControlTemplate.Triggers>
+		
+	</ControlTemplate>
+
+	<Style
+		TargetType="grid:GridViewCheckBox">
+		<Setter Property="Template" Value="{StaticResource GridViewCheckBoxTemplate}" />
+	</Style>
+
+	
+	
+</ResourceDictionary>

@@ -1,0 +1,477 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					
+	
+		xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"     
+		xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Data"
+		xmlns:telerikData="clr-namespace:Telerik.Windows.Data;assembly=Telerik.Windows.Controls.Data"
+		xmlns:dataPager="clr-namespace:Telerik.Windows.Controls.Data.DataPager;assembly=Telerik.Windows.Controls.Data"
+		xmlns:dataFilter="clr-namespace:Telerik.Windows.Controls.Data.DataFilter;assembly=Telerik.Windows.Controls.Data"
+        xmlns:dataForm="clr-namespace:Telerik.Windows.Controls.Data.DataForm;assembly=Telerik.Windows.Controls.Data"
+		xmlns:propertyGrid="clr-namespace:Telerik.Windows.Controls.Data.PropertyGrid;assembly=Telerik.Windows.Controls.Data"
+>
+
+<telerik:MetroColors x:Key="MetroColors" />
+<SolidColorBrush x:Key="StrongBrush" telerik:MetroColors.Color="Strong" />
+<SolidColorBrush x:Key="AccentBrush" telerik:MetroColors.Color="Accent" />
+<SolidColorBrush x:Key="MarkerBrush" telerik:MetroColors.Color="Marker" />
+<SolidColorBrush x:Key="BasicBrush" telerik:MetroColors.Color="Basic" />
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<telerik:MetroTheme x:Key="Theme" />
+
+	    
+    
+    <ControlTemplate x:Key="ToggleButtonTemplate" TargetType="telerik:RadToggleButton">
+        <Border Background="Transparent" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            
+            <Grid>
+                <Path x:Name="plus" Fill="{StaticResource StrongBrush}" Stretch="Fill" Stroke="{x:Null}" Margin="{TemplateBinding Padding}" Data="M1.937,0 L2.937,0 2.937,2.0209999 5,2.0209999 5,3.0209999 2.937,3.0209999 2.937,5 1.937,5 1.937,3.0209999 0,3.0209999 0,2.0209999 1.937,2.0209999 z" Width="9" Height="9" />
+                <Rectangle x:Name="minus" Fill="{StaticResource StrongBrush}" Stroke="{x:Null}" RadiusX="0" RadiusY="0" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" Height="2" HorizontalAlignment="Center" Width="9" Opacity="0"/>
+            </Grid>
+
+        </Border>
+        
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="plus"  Property="Opacity" Value="0" />
+                <Setter TargetName="minus"  Property="Opacity" Value="1" />
+                <Setter TargetName="minus" Property="Fill" Value="{StaticResource AccentBrush}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+        
+    </ControlTemplate>
+
+    <Style TargetType="telerik:RadToggleButton"	x:Key="PropertyGridNestedToggleButtonStyle"
+        >
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{StaticResource MarkerBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BasicBrush}" />
+        <Setter Property="Background" Value="{StaticResource MainBrush}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Template" Value="{StaticResource ToggleButtonTemplate}" />
+        
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        
+    </Style>
+    
+    <telerik:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
+    <telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    <propertyGrid:GroupingItemsSourceConverter x:Key="GroupingItemsSourceConverter" />
+
+    <ControlTemplate TargetType="telerik:RadToggleButton" x:Key="PropertyGridToggleButtonTemplate" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"  
+                    HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" Width="25">
+                <Path x:Name="path" Data="M10.000001,0 L20.000002,20 L2.3395899E-08,20 z" Fill="{StaticResource StrongBrush}" 
+                      RenderTransformOrigin="0.5,0.5" Stretch="Fill" Width="6" Height="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform Angle="180"/>
+                            <TranslateTransform />
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+            </Border>
+
+            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" 
+                    Grid.ColumnSpan="2" Grid.Column="1" >
+                <ContentPresenter x:Name="PART_ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                  Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            </Border>
+
+            <Border x:Name="ExpandBorder" Visibility="Collapsed"
+                        BorderBrush="{TemplateBinding BorderBrush}" Background="Transparent"
+                        Grid.ColumnSpan="2" Grid.Column="1" BorderThickness="0,0,0,1" />
+
+        </Grid>
+        
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="path" Property="RenderTransform" >
+                    <Setter.Value>
+                        <RotateTransform Angle="0" />
+                    </Setter.Value>
+                </Setter>
+                <Setter TargetName="ExpandBorder" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+        
+    </ControlTemplate>
+    <Style TargetType="telerik:RadToggleButton" x:Key="PropertyGridToggleButtonStyle">
+        <Setter Property="Template" Value="{StaticResource PropertyGridToggleButtonTemplate}"/>
+        <Setter Property="Background" Value="{StaticResource MainBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BasicBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Height" Value="25"/>
+        
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        
+    </Style>
+
+    <DataTemplate x:Key="flatTemplate">
+        <ItemsControl ItemsSource="{Binding}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <propertyGrid:PropertyGridField  Content ="{Binding}" telerik:StyleManager.Theme="{StaticResource Theme}">
+                        <propertyGrid:PropertyGridField.Resources>
+                            <Style  x:Key="TextBox" TargetType="TextBox"  >
+                                <Setter Property="Padding" Value="3,2,0,2"/>
+                                <Setter Property="BorderBrush" Value="Transparent" />
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="{StaticResource MarkerBrush}"/>
+                                
+                                <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                
+                            </Style>
+                            <Style x:Key="CheckBox" TargetType="CheckBox"   >
+                                <Setter Property="Margin" Value="3,2,0,2"/>
+                                
+                                <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                
+                            </Style>
+                            <Style x:Key="RadComboBox" TargetType="telerik:RadComboBox"   >
+                                <Setter Property="ItemContainerStyle">
+                                    <Setter.Value>
+                                        <Style TargetType="telerik:RadComboBoxItem"  >
+                                            
+                                            <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                            
+                                        </Style>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="IsEditable" Value="True"/>
+                                <Setter Property="Foreground" Value="{StaticResource MarkerBrush}"/>
+                                
+                                <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                
+                            </Style>
+                            <Style x:Key="RadDateTimePicker" TargetType="telerik:RadDateTimePicker"   >
+                                
+                                <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                
+                            </Style>
+                        </propertyGrid:PropertyGridField.Resources>
+                    </propertyGrid:PropertyGridField>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>
+    <DataTemplate x:Key="groupTemplate" >
+        <ItemsControl ItemsSource="{Binding ., Converter={StaticResource GroupingItemsSourceConverter}}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{StaticResource BasicBrush}" BorderThickness="0,0,0,1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <telerik:RadToggleButton  x:Name="expandCollapseButton" Content="{Binding Key}" IsChecked="True" Style="{StaticResource PropertyGridToggleButtonStyle}" Foreground="{StaticResource AccentBrush}"/>
+                            <Border BorderBrush="{StaticResource BasicBrush}" BorderThickness="1,0,0,0" Margin="25,0,0,0" Grid.Row="1">
+                                <ContentPresenter x:Name="PART_ContentPresenter" ContentTemplate="{StaticResource flatTemplate}" Content="{Binding Items}"  
+                                              Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter}, ElementName=expandCollapseButton}"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </DataTemplate>
+    <propertyGrid:ItemTemplateConverter 
+		x:Key="ItemTemplateConverter"
+		FlatTemplate="{StaticResource flatTemplate}"
+		GroupTemplate="{StaticResource groupTemplate}"
+		/>
+
+    <Style x:Key="GripperStyle" TargetType="Thumb">
+        <Setter Property="Width" Value="8"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Cursor" Value="SizeWE"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Padding="{TemplateBinding Padding}" 
+							Background="{TemplateBinding Background}" 
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="PropertyGridColumnResizerTemplate" TargetType="propertyGrid:PropertyGridColumnResizer">
+        <Border VerticalAlignment="Stretch" Background="{TemplateBinding Background}">
+            <Thumb HorizontalAlignment="Right" Style="{StaticResource GripperStyle}"/>
+        </Border>
+    </ControlTemplate>
+    <Style TargetType="propertyGrid:PropertyGridColumnResizer">
+        <Setter Property="Template" Value="{StaticResource PropertyGridColumnResizerTemplate}" />
+        <Setter Property="IsTabStop" Value="False"/>
+        
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        
+    </Style>
+
+    <propertyGrid:FlatModeConverter x:Key="FlatModeConverter" />
+    <propertyGrid:NestedModeConverter x:Key="NestedModeConverter" />
+    <propertyGrid:FlatItemSourceConverter x:Key="FlatItemSourceConverter" />
+    <ControlTemplate x:Key="PropertyGridFieldTemplate" TargetType="propertyGrid:PropertyGridField">
+        <Border x:Name="PART_RootElement" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+            <StackPanel>
+                <Grid Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NestedModeConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="PART_PropertyGridFieldGridN">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding LabelColumnWidth, ElementName=PropertyGridPresenter}"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle x:Name="SelectionBackground"  Grid.Column="0" Fill="{StaticResource BasicBrush}" HorizontalAlignment="Stretch" Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Stretch"/>
+                        <Rectangle x:Name="Background_Over" Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource StrongBrush}" Opacity="0.1" HorizontalAlignment="Stretch" Visibility="{Binding IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Stretch"/>
+                        <Border BorderBrush="{StaticResource BasicBrush}"  BorderThickness="0">
+                            <StackPanel Orientation="Horizontal">
+                                <propertyGrid:PropertyGridIndentPresenter IndentLevel="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IndentLevel}">
+                                    <propertyGrid:PropertyGridIndentPresenter.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </propertyGrid:PropertyGridIndentPresenter.ItemsPanel>
+                                    <propertyGrid:PropertyGridIndentPresenter.ItemTemplate>
+                                        <DataTemplate>
+                                            <propertyGrid:PropertyGridIndentCell />
+                                        </DataTemplate>
+                                    </propertyGrid:PropertyGridIndentPresenter.ItemTemplate>
+                                </propertyGrid:PropertyGridIndentPresenter>
+
+                                <telerik:RadToggleButton x:Name="PART_NestedPropertiesButton" Style="{StaticResource PropertyGridNestedToggleButtonStyle}"  Background="Transparent"  Width="25" Visibility="{Binding HasNestedProperties, Converter={StaticResource BooleanToVisibilityConverter}}" IsChecked="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsExpanded, Mode=TwoWay}"/>
+
+                                <Grid Margin="5,0,0,0">
+                                    <TextBlock FontFamily="Segoe UI Semibold" FontSize="12" Foreground="{StaticResource StrongBrush}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  Margin="4,2,0,2" Text="{Binding DisplayName}"  Visibility="{Binding IsSelected, Converter={StaticResource InvertedBooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <TextBlock FontFamily="Segoe UI Semibold" FontSize="12" Foreground="{StaticResource MarkerBrush}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="4,2,0,2" Text="{Binding DisplayName}"  Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </Grid>
+                            </StackPanel>                           
+                        </Border>
+                        <Border BorderBrush="{StaticResource BasicBrush}" BorderThickness="0" Grid.Column="1">
+                            <ContentPresenter  Margin="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <propertyGrid:PropertyGridColumnResizer x:Name="ColumnResizer" Grid.Column="0" telerik:StyleManager.Theme="{StaticResource Theme}" Margin="0,0,-4,0"  HorizontalAlignment="Right"/>
+                    </Grid>
+                    <ItemsControl Grid.Row="1"  ItemsSource="{Binding NestedProperties}" Visibility="{Binding ElementName=PART_NestedPropertiesButton, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <propertyGrid:PropertyGridField  Content ="{Binding}" telerik:StyleManager.Theme="{StaticResource Theme}">
+                                    <propertyGrid:PropertyGridField.Resources>
+                                        <Style  x:Key="TextBox" TargetType="TextBox"  >
+                                            <Setter Property="Padding" Value="3,2,0,2"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            
+                                            <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                            
+                                        </Style>
+                                        <Style  x:Key="CheckBox" TargetType="CheckBox"  >
+                                            <Setter Property="Margin" Value="3,2,0,2"/>
+                                            
+                                            <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                            
+                                        </Style>
+                                        <Style x:Key="RadComboBox" TargetType="telerik:RadComboBox"   >
+                                            <Setter Property="ItemContainerStyle">
+                                                <Setter.Value>
+                                                    <Style TargetType="telerik:RadComboBoxItem"  >
+                                                        
+                                                        <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                                        
+                                                    </Style>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Setter Property="IsEditable" Value="True"/>
+                                            
+                                            <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                            
+                                        </Style>
+                                        <Style x:Key="RadDateTimePicker" TargetType="telerik:RadDateTimePicker"   >
+                                            
+                                            <Setter Property="telerik:StyleManager.Theme" Value="{StaticResource Theme}"/>
+                                            
+                                        </Style>
+                                    </propertyGrid:PropertyGridField.Resources>
+                                </propertyGrid:PropertyGridField>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+                <Grid x:Name="PART_PropertyGridFieldGrid"  Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource FlatModeConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding LabelColumnWidth, ElementName=PropertyGridPresenter}"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle  Grid.Column="0" Fill="{StaticResource BasicBrush}" HorizontalAlignment="Stretch" Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Stretch"/>
+                    <Rectangle  Grid.Column="0" Grid.ColumnSpan="2" Fill="{StaticResource StrongBrush}" Opacity="0.1" HorizontalAlignment="Stretch" Visibility="{Binding IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Stretch"/>
+                    <Border BorderBrush="{StaticResource BasicBrush}"  BorderThickness="0">
+                        <Grid Margin="5,0,0,0">
+                            <TextBlock FontFamily="Segoe UI Semibold" FontSize="12" Foreground="{StaticResource StrongBrush}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"  Margin="4,2,0,2" Text="{Binding DisplayName}"  Visibility="{Binding IsSelected, Converter={StaticResource InvertedBooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <TextBlock FontFamily="Segoe UI Semibold" FontSize="12" Foreground="{StaticResource MarkerBrush}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="4,2,0,2" Text="{Binding DisplayName}"  Visibility="{Binding IsSelected, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="{StaticResource BasicBrush}" BorderThickness="0" Grid.Column="1">
+                        <ContentPresenter  Margin="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                    <propertyGrid:PropertyGridColumnResizer Grid.Column="0" telerik:StyleManager.Theme="{StaticResource Theme}" Margin="0,0,-4,0"  HorizontalAlignment="Right"/>
+                </Grid>
+            </StackPanel>            
+        </Border>
+    </ControlTemplate>
+    <Style TargetType="propertyGrid:PropertyGridField">
+        <Setter Property="Template" Value="{StaticResource PropertyGridFieldTemplate}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BasicBrush}"/>
+        <Setter Property="Background" Value="{StaticResource MainBrush}"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        
+    </Style>
+
+    <ControlTemplate x:Key="RadPropertyGridTemplate" TargetType="controls:RadPropertyGrid">
+        <Border x:Name="PART_RootElement"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+            <Grid x:Name="PART_PropertyGridContainer" Background="{TemplateBinding Background}" 
+                   
+                SnapsToDevicePixels="True"
+                 >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Border x:Name="Header" BorderBrush="{StaticResource BasicBrush}" BorderThickness="0,0,0,1">
+
+                    <Grid Margin="1,1,2,1" Background="{StaticResource MainBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <telerik:RadRadioButton x:Name="groupButton"  Visibility="{TemplateBinding SortAndGroupButtonsVisibility}" BorderBrush="Transparent" BorderThickness="0,0,0,0"  Margin="1,0,3,0" telerik:StyleManager.Theme="{StaticResource Theme}" Height="22"  Width="28">
+                            <ToolTipService.ToolTip>
+                                <ToolTip telerik:StyleManager.Theme="{StaticResource Theme}" telerik:LocalizationManager.ResourceKey="Categorize"/>
+                            </ToolTipService.ToolTip>
+                            <Grid>
+                                <Path Data="M7.0000019,8.9999981 L16.999998,8.9999981 L16.999998,9.9999981 L7.0000019,9.9999981 z M7.0000019,6.9999995 L16.999998,6.9999995 L16.999998,7.9999995 L7.0000019,7.9999995 z M0,6 L3.9999998,8.5 L0,11 z M6.999999,3.0000055 L16.999996,3.0000055 L16.999996,4.0000052 L6.999999,4.0000052 z M7.0000019,0.99999905 L16.999998,0.99999905 L16.999998,1.9999989 L7.0000019,1.9999989 z M0,0 L4,2.5000002 L0,5.0000005 z" 
+                                      Fill="{StaticResource StrongBrush}" Stretch="Fill"  Width="17" Height="11"  Visibility="{Binding IsChecked, Converter={StaticResource InvertedBooleanToVisibilityConverter},ElementName=groupButton}" 
+									  
+                                    SnapsToDevicePixels="True"
+                                     />
+                                    <Path Data="M7.0000019,8.9999981 L16.999998,8.9999981 L16.999998,9.9999981 L7.0000019,9.9999981 z M7.0000019,6.9999995 L16.999998,6.9999995 L16.999998,7.9999995 L7.0000019,7.9999995 z M0,6 L3.9999998,8.5 L0,11 z M6.999999,3.0000055 L16.999996,3.0000055 L16.999996,4.0000052 L6.999999,4.0000052 z M7.0000019,0.99999905 L16.999998,0.99999905 L16.999998,1.9999989 L7.0000019,1.9999989 z M0,0 L4,2.5000002 L0,5.0000005 z" 
+                                      Fill="{StaticResource MainBrush}" Stretch="Fill"  Width="17" Height="11"  Visibility="{Binding IsChecked, Converter={StaticResource BooleanToVisibilityConverter},ElementName=groupButton}"
+									 
+                                        SnapsToDevicePixels="True"
+                                         />
+                            </Grid>
+                        </telerik:RadRadioButton>
+
+                        <telerik:RadRadioButton x:Name="sortButton" Foreground="{StaticResource StrongBrush}"  Content="A-Z"  BorderBrush="Transparent" BorderThickness="0,0,0,0"   Visibility="{TemplateBinding SortAndGroupButtonsVisibility}"  Grid.Column="1" IsChecked="True" telerik:StyleManager.Theme="{StaticResource Theme}" Height="22"  Width="28">
+                            <ToolTipService.ToolTip>
+                                <ToolTip telerik:StyleManager.Theme="{StaticResource Theme}"  telerik:LocalizationManager.ResourceKey="Alphabetical"/>
+                            </ToolTipService.ToolTip>
+                        </telerik:RadRadioButton>
+                        <TextBox x:Name="searchAsYouTypeTextBox"
+								 Visibility="{TemplateBinding SearchBoxVisibility}" 
+								 Grid.Column="2" 
+								 HorizontalAlignment="Stretch"
+								 Margin="2,0,0,0" 
+								 Text="{Binding FilterText, ElementName=PropertyGridPresenter, Mode=TwoWay}" 
+								 telerik:StyleManager.Theme="{StaticResource Theme}" 
+								 telerik:TextBoxBehavior.SelectAllOnGotFocus="True" 
+								 telerik:TextBoxBehavior.UpdateTextOnEnter="True" 
+								 telerik:TextBoxBehavior.UpdateTextOnTextChanged="True"/>
+
+                        <Path Grid.Column="2" Visibility="{TemplateBinding SearchBoxVisibility}" 
+                              Data="M8.4939966,1.9999999 C6.5610008,1.9999999 4.9939971,3.5670033 4.9939971,5.5 C4.9939971,7.4329967 6.5610008,9 8.4939966,9 C10.426993,9 11.993997,7.4329967 11.993997,5.5 C11.993997,3.5670033 10.426993,1.9999999 8.4939966,1.9999999 z M8.4939976,0 C11.531564,-8.7786177E-08 13.993998,2.4624338 13.993998,5.5 C13.993998,8.5375662 11.531564,11 8.4939976,11 C7.3549109,11 6.2967014,10.65372 5.4188957,10.060686 L5.3678761,10.025319 L1.4142134,13.978982 L0,12.564768 L3.9563832,8.6083851 L3.9333115,8.5751028 C3.3402777,7.6972966 2.9939978,6.6390872 2.9939978,5.5 C2.9939978,2.4624338 5.4564314,-8.7786177E-08 8.4939976,0 z" 
+                              Fill="{StaticResource StrongBrush}" HorizontalAlignment="Right" Height="14" Margin="4" Stretch="Fill" StrokeThickness="2" Width="14"
+                               
+                            SnapsToDevicePixels="True"
+                             />
+                    </Grid>
+
+                </Border>
+                <Border Grid.Row="1" Background="{StaticResource MainBrush}" Margin="0,0,0,1">
+                    <ScrollViewer Grid.Row="1" x:Name="PART_ItemsScrollViewer" BorderBrush="Transparent" BorderThickness="0,0,0,0" telerik:StyleManager.Theme="{StaticResource Theme}"  ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+
+                        <propertyGrid:PropertyGridPresenter
+											x:Name="PropertyGridPresenter"
+											LabelColumnWidth="{Binding LabelColumnWidth, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+											telerik:StyleManager.Theme="{StaticResource Theme}" 
+											PropertyDefinitions = "{Binding PropertyDefinitions, RelativeSource={RelativeSource TemplatedParent}}"
+											ContentTemplate="{Binding IsChecked, ElementName=groupButton, Converter={StaticResource ItemTemplateConverter}}" />
+
+                    </ScrollViewer>
+                </Border>
+
+                <StackPanel x:Name="PART_DescriptionPanel" Visibility="{TemplateBinding DescriptionPanelVisibility}" Orientation="Vertical" Grid.Row="2" MinHeight="75" Background="{StaticResource BasicBrush}">
+                    <TextBlock Text="{Binding SelectedPropertyDefinition.DisplayName,ElementName=PropertyGridPresenter}" Margin="9,10,20,5" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding SelectedPropertyDefinition.Description,ElementName=PropertyGridPresenter}" Margin="9,0,20,5" TextWrapping="Wrap"/>
+                </StackPanel>
+
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <Style TargetType="controls:RadPropertyGrid">
+        <Setter Property="Template" Value="{StaticResource RadPropertyGridTemplate}" />
+        <Setter Property="Background" Value="{StaticResource MainBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BasicBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource MarkerBrush}"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        
+    </Style>   
+
+    <Style TargetType="propertyGrid:PropertyGridIndentCell">
+        <Setter Property="BorderThickness" Value="0,0,1,0" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Padding" Value="0" />
+        
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="propertyGrid:PropertyGridIndentCell">
+                    <Border Background="Transparent" Width="25"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+
+</ResourceDictionary>

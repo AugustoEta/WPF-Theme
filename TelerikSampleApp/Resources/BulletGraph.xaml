@@ -1,0 +1,341 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+				    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+				                    
+				    xmlns:system="clr-namespace:System;assembly=mscorlib"
+				    xmlns:telerikControls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+
+				    xmlns:bulletGraph="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.DataVisualization"
+				    xmlns:bulletGraphs="clr-namespace:Telerik.Windows.Controls.BulletGraph;assembly=Telerik.Windows.Controls.DataVisualization"
+>
+    
+<telerikControls:MetroColors x:Key="MetroColors" />
+<telerikControls:OpacityConverter x:Key="Converter" />
+<SolidColorBrush x:Key="FeaturedMeasureBrush" telerikControls:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="ProjectedValueBrush" telerikControls:MetroColors.Color="Accent" />
+<SolidColorBrush x:Key="ComparativeMeasureBrush" telerikControls:MetroColors.Color="Marker"  />
+<SolidColorBrush x:Key="QualityPoorBrush" telerikControls:MetroColors.Color="Strong" />
+<SolidColorBrush x:Key="QualitySatisfactoryBrush" Color="{Binding Source={StaticResource MetroColors}, Path=Palette.StrongColor, Converter={StaticResource Converter}, ConverterParameter=191}" telerikControls:MetroColors.Color="BoundColor" />
+<SolidColorBrush x:Key="QualityGoodBrush" Color="{Binding Source={StaticResource MetroColors}, Path=Palette.StrongColor, Converter={StaticResource Converter}, ConverterParameter=127}" telerikControls:MetroColors.Color="BoundColor" />
+<SolidColorBrush x:Key="BulletGraphBorderBrush" Color="Transparent" />
+<Thickness x:Key="BulletGraphBorderThickness">0</Thickness>
+<SolidColorBrush x:Key="BulletGraphForeground" telerikControls:MetroColors.Color="Strong" />
+<FontFamily x:Key="BulletGraphFontFamily">Segoe UI</FontFamily>
+<telerik:MetroTheme x:Key="Theme" />
+<SolidColorBrush x:Key="VerticalQualityPoorBrush" telerikControls:MetroColors.Color="Strong" />
+<SolidColorBrush x:Key="VerticalQualitySatisfactoryBrush" Color="{Binding Source={StaticResource MetroColors}, Path=Palette.StrongColor, Converter={StaticResource Converter}, ConverterParameter=191}" telerikControls:MetroColors.Color="BoundColor" />
+<SolidColorBrush x:Key="VerticalQualityGoodBrush" Color="{Binding Source={StaticResource MetroColors}, Path=Palette.StrongColor, Converter={StaticResource Converter}, ConverterParameter=127}" telerikControls:MetroColors.Color="BoundColor" />
+<SolidColorBrush x:Key="ZeroIndicatorBackground" telerikControls:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="TickBrush" Color="{Binding Source={StaticResource MetroColors}, Path=Palette.StrongColor, Converter={StaticResource Converter}, ConverterParameter=153}" telerikControls:MetroColors.Color="BoundColor" />
+
+    
+
+    <Style TargetType="bulletGraphs:QualitativeRangeContainer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:QualitativeRangeContainer">
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Rectangle Fill="{Binding Brush}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <bulletGraphs:BarStackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:QuantitativeScaleContainer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:QuantitativeScaleContainer">
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <bulletGraphs:PositioningScalePanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:FeaturedMeasurePresenter">
+        <Setter Property="BarPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <bulletGraphs:BarStackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="EllipsePanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <bulletGraphs:PositioningPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:FeaturedMeasurePresenter">
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:ProjectedMeasurePresenter">
+        <Setter Property="BarPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <bulletGraphs:BarStackPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="EllipsePanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <bulletGraphs:PositioningPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:ProjectedMeasurePresenter">
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:ComparativeMeasuresContainer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:ComparativeMeasuresContainer">
+                    <ItemsPresenter />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <bulletGraphs:RectangleItem />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <bulletGraphs:PositioningPanel />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraph:RadHorizontalBulletGraph">
+        <Setter Property="FeaturedMeasureBrush" Value="{StaticResource FeaturedMeasureBrush}" />
+        <Setter Property="ProjectedValueBrush" Value="{StaticResource ProjectedValueBrush}" />
+        <Setter Property="ComparativeMeasureBrush" Value="{StaticResource ComparativeMeasureBrush}" />
+        <Setter Property="ComparativeMeasureThickness" Value="2" />
+        <Setter Property="QualityPoorBrush" Value="{StaticResource QualityPoorBrush}" />
+        <Setter Property="QualitySatisfactoryBrush" Value="{StaticResource QualitySatisfactoryBrush}" />
+        <Setter Property="QualityGoodBrush" Value="{StaticResource QualityGoodBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BulletGraphBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource BulletGraphBorderThickness}" />
+        <Setter Property="Foreground" Value="{StaticResource BulletGraphForeground}" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontFamily" Value="{StaticResource BulletGraphFontFamily}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraph:RadHorizontalBulletGraph">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0"
+                                Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" >
+                            <Grid>
+                                <bulletGraphs:QualitativeRangeContainer ChildrenSource="{TemplateBinding QualitativeRanges}" />
+                                <bulletGraphs:PositioningIndicatorPanel x:Name="PART_AxisPanel" />
+                                <bulletGraphs:ProjectedMeasurePresenter ChildrenSource="{TemplateBinding ProjectedMeasures}" />
+                                <bulletGraphs:FeaturedMeasurePresenter ChildrenSource="{TemplateBinding FeaturedMeasures}" />
+                                <bulletGraphs:ComparativeMeasuresContainer ChildrenSource="{TemplateBinding MergedComparativeMeasures}" />
+                            </Grid>
+                        </Border>
+                        <bulletGraphs:QuantitativeScaleContainer telerikControls:StyleManager.Theme="{StaticResource Theme}" TextFormatString="{TemplateBinding TextFormatString}" Visibility="{TemplateBinding QuantitativeScaleVisibility}" Grid.Row="1" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraph:RadVerticalBulletGraph">
+        <Setter Property="FeaturedMeasureBrush" Value="{StaticResource FeaturedMeasureBrush}" />
+        <Setter Property="ProjectedValueBrush" Value="{StaticResource ProjectedValueBrush}" />
+        <Setter Property="ComparativeMeasureBrush" Value="{StaticResource ComparativeMeasureBrush}" />
+        <Setter Property="ComparativeMeasureThickness" Value="2" />
+        <Setter Property="QualityPoorBrush" Value="{StaticResource VerticalQualityPoorBrush}" />
+        <Setter Property="QualitySatisfactoryBrush" Value="{StaticResource VerticalQualitySatisfactoryBrush}" />
+        <Setter Property="QualityGoodBrush" Value="{StaticResource VerticalQualityGoodBrush}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BulletGraphBorderBrush}" />
+        <Setter Property="BorderThickness" Value="{StaticResource BulletGraphBorderThickness}" />
+        <Setter Property="Foreground" Value="{StaticResource BulletGraphForeground}" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontFamily" Value="{StaticResource BulletGraphFontFamily}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraph:RadVerticalBulletGraph">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <bulletGraphs:QuantitativeScaleContainer telerikControls:StyleManager.Theme="{StaticResource Theme}" TextFormatString="{TemplateBinding TextFormatString}" Visibility="{TemplateBinding QuantitativeScaleVisibility}" Grid.Column="0" />
+                            <Border Grid.Column="1" 
+                                    Background="{TemplateBinding Background}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" >
+                                <Grid>
+                                    <bulletGraphs:QualitativeRangeContainer ChildrenSource="{TemplateBinding QualitativeRanges}" />
+                                        <bulletGraphs:PositioningIndicatorPanel x:Name="PART_AxisPanel" />
+                                        <bulletGraphs:ProjectedMeasurePresenter ChildrenSource="{TemplateBinding ProjectedMeasures}" />
+                                        <bulletGraphs:FeaturedMeasurePresenter ChildrenSource="{TemplateBinding FeaturedMeasures}" />
+                                        <bulletGraphs:ComparativeMeasuresContainer ChildrenSource="{TemplateBinding MergedComparativeMeasures}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:ZeroIndicator">
+        <Setter Property="Background" Value="{StaticResource ZeroIndicatorBackground}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:ZeroIndicator">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:EllipseItem">
+        <Setter Property="LengthPercent" Value="0.6" />
+        <Setter Property="WidthHeightRatio" Value="0.5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:EllipseItem">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" >
+                        <Grid>
+                            <Ellipse Fill="{Binding Brush}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:BarItem">
+        <Setter Property="LengthPercent" Value="0.33" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:BarItem">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" >
+                        <Grid>
+                            <Rectangle Fill="{Binding Brush}" Margin="{TemplateBinding DynamicMargin}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:RectangleItem">
+        <Setter Property="LengthPercent" Value="0.7" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:RectangleItem">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" >
+                        <Grid>
+                            <Rectangle Fill="{Binding Brush}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:HorizontalLabelTick">
+        <Setter Property="TickBrush" Value="{StaticResource TickBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:HorizontalLabelTick">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" >
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Rectangle HorizontalAlignment="Center" VerticalAlignment="Top" Height="6" Width="1" Fill="{TemplateBinding TickBrush}" />
+                            </Grid>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" TextAlignment="Center" Text="{Binding Text}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="bulletGraphs:VerticalLabelTick">
+        <Setter Property="TickBrush" Value="{StaticResource TickBrush}" />
+        <Setter Property="Padding" Value="2,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="bulletGraphs:VerticalLabelTick">
+                    <Border Background="{TemplateBinding Background}" 
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding Text}" Padding="{TemplateBinding Padding}" />
+                            <Grid Grid.Column="1">
+                                <Rectangle HorizontalAlignment="Right" VerticalAlignment="Center" Height="1" Width="6" Fill="{TemplateBinding TickBrush}" />
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
+</ResourceDictionary>

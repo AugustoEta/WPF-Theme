@@ -1,0 +1,252 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					
+				
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"     
+					xmlns:grid="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:treelist="clr-namespace:Telerik.Windows.Controls.TreeListView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+>
+
+<telerik:MetroColors x:Key="MetroColors"/>
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="AccentBrush" telerik:MetroColors.Color="Accent" />
+<SolidColorBrush x:Key="BasicBrush" telerik:MetroColors.Color="Basic" />
+<SolidColorBrush x:Key="StrongBrush" telerik:MetroColors.Color="Strong" />
+<SolidColorBrush x:Key="ValidationBrush" telerik:MetroColors.Color="Validation" />
+<telerik:MetroTheme x:Key="Theme" />
+
+	
+
+	<telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+	<Style TargetType="controls:TreeListViewDragCue">
+		<Setter Property="IsHitTestVisible" Value="False" />
+		<Setter Property="Foreground" Value="{StaticResource MainBrush}"/>
+		<Setter Property="Padding" Value="3,0" />
+		<Setter Property="FontSize" Value="11" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:TreeListViewDragCue">
+					<StackPanel>
+						
+						<Grid HorizontalAlignment="Left" Visibility="{TemplateBinding DragPreviewVisibility}" MinHeight="18">
+							<Border Background="{StaticResource AccentBrush}">
+								<ItemsPresenter Margin="{TemplateBinding Padding}"/>
+							</Border>
+							<Grid x:Name="DraggedItemsCountContainer" Visibility="Collapsed"
+									Width="Auto" Height="Auto" HorizontalAlignment="Center"
+									VerticalAlignment="Center">
+								<Border BorderBrush="{StaticResource BasicBrush}" Background="{StaticResource MainBrush}" MinHeight="18"
+										BorderThickness="1" Margin="0,2,0,0" Padding="40"/>
+
+								<TextBlock Margin="3" x:Name="DraggedItemsCountText"
+											HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+											VerticalAlignment="{TemplateBinding VerticalAlignment}"
+											Text="5"/>
+							</Grid>
+						</Grid>
+
+						<Border BorderBrush="{StaticResource BasicBrush}" Background="{StaticResource MainBrush}" MinHeight="18"
+								BorderThickness="1" CornerRadius="1" Margin="0,2,0,0" Padding="4,4,0,0"  Visibility="{TemplateBinding DragTooltipVisibility}">
+							<StackPanel Orientation="Horizontal">
+								<ContentPresenter x:Name="DropImpossibleIconElement"
+												  Content="{TemplateBinding DropImpossibleIcon}" 
+												  ContentTemplate="{TemplateBinding DropImpossibleIconTemplate}" 
+												  Visibility="Collapsed"/>
+
+								<ContentPresenter x:Name="DropPossibleIconElement"
+												  Content="{TemplateBinding DropPossibleIcon}"
+												  ContentTemplate="{TemplateBinding DropPossibleIconTemplate}" />
+
+								<ContentControl Margin="4,0,0,0" Content="{TemplateBinding DragActionContent}"
+												ContentTemplate="{TemplateBinding DragActionContentTemplate}" 
+												VerticalAlignment="Center" Foreground="{StaticResource StrongBrush}"/>
+
+								<ContentControl Foreground="{StaticResource StrongBrush}" Content="{TemplateBinding DragTooltipContent}"
+												  ContentTemplate="{TemplateBinding DragTooltipContentTemplate}"
+												  VerticalAlignment="Center" />
+							</StackPanel>
+						</Border>
+					</StackPanel>
+					
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsDropPossible" Value="False">
+							<Setter Property="Visibility" Value="Visible" TargetName="DropImpossibleIconElement" />
+							<Setter Property="Visibility" Value="Collapsed" TargetName="DropPossibleIconElement" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+					
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="DropImpossibleIcon" 
+				Value="The icon is assigned as DataTemplate because assigning as Content triggers a bug in Silverlight" />
+		<Setter Property="DropImpossibleIconTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<Grid>
+						<Path Fill="{StaticResource ValidationBrush}" Stretch="Fill" Margin="0,0,0,6" StrokeThickness="0.5"  Width="11" Height="11" Data="M2.0090871,3.5463004 L1.9827784,3.5933623 C1.6748887,4.1601357 1.5,4.8096442 1.5,5.5 1.5,7.7091389 3.2908609,9.5 5.5,9.5 6.1903558,9.5 6.8398643,9.3251114 7.4066377,9.0172215 L7.4536991,8.9909134 z M5.5,1.5 C4.7406082,1.5 4.0306425,1.7116154 3.4258544,2.0790935 L3.3916554,2.1004417 8.8995581,7.6083441 8.9209061,7.5741453 C9.2883844,6.9693575 9.5,6.2593913 9.5,5.5 9.5,3.2908609 7.7091389,1.5 5.5,1.5 z M5.5,0 C8.5375662,0 11,2.4624338 11,5.5 11,8.5375662 8.5375662,11 5.5,11 2.4624338,11 0,8.5375662 0,5.5 0,2.4624338 2.4624338,0 5.5,0 z"/>
+					</Grid>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="DropPossibleIcon"
+				Value="The icon is assigned as DataTemplate because assigning as Content triggers a bug in Silverlight" />
+		<Setter Property="DropPossibleIconTemplate">
+			<Setter.Value>
+				<DataTemplate>
+					<Grid>
+						<Path Stretch="Fill" Fill="{StaticResource StrongBrush}"  Data="M0,-0.76793623 L2,-0.76793623 L3.0774765,0.30954036 L3.0857141,-5.9258094 L4.956666,-5.9187422 L4.9660869,0.26597711 L6,-0.76793599 L8,-0.76793599 L4,4.0282435 z" Width="7" Height="7" RenderTransformOrigin="0.5,0.5">
+							<Path.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform/>
+									<SkewTransform/>
+									<RotateTransform Angle="-90"/>
+									<TranslateTransform X="2.9845001144409182" Y="-2.984500114440916"/>
+								</TransformGroup>
+							</Path.RenderTransform>
+						</Path>
+					</Grid>
+				</DataTemplate>
+			</Setter.Value>
+		</Setter>
+		
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		
+	</Style>
+
+	<ControlTemplate x:Key="RadTreeListViewTemplate" TargetType="controls:RadTreeListView">
+		
+		<AdornerDecorator>
+			
+
+			<Border Name="PART_MasterGridContainer" 
+					BorderBrush="{TemplateBinding BorderBrush}"
+					BorderThickness="{TemplateBinding BorderThickness}"
+					Padding="{TemplateBinding Padding}">
+
+				<Grid Background="{TemplateBinding Background}" x:Name="HierrarchyBackground">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition x:Name="PART_AttachedBehaviorRow" Height="Auto" />
+						<RowDefinition />
+						<RowDefinition x:Name="ScrollBarRow" MinHeight="0" Height="0"/>
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition x:Name="ScrollBarColumn" MinWidth="0" Width="0"/>
+					</Grid.ColumnDefinitions>
+					<Border x:Name="PART_FrozenColumnsPreview" Grid.Row="1" Visibility="Collapsed" HorizontalAlignment="Left" VerticalAlignment="Stretch" Grid.RowSpan="4" Width="5"/>
+					<grid:GridViewScrollViewer x:Name="PART_ItemsScrollViewer" Background="Transparent"
+									   CanContentScroll="True" telerik:StyleManager.Theme="{StaticResource Theme}"
+									   Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2">
+						<grid:GridViewScrollViewer.HeaderRow>
+							<grid:GridViewHeaderRow x:Name="PART_HeaderRow"
+									telerik:StyleManager.Theme="{StaticResource Theme}"
+									IndentLevel="{TemplateBinding GroupCount}" />
+						</grid:GridViewScrollViewer.HeaderRow>
+						<grid:GridViewScrollViewer.NewRow>
+							<grid:GridViewNewRow Name="PART_AddNewRow" 
+									 telerik:StyleManager.Theme="{StaticResource Theme}"
+									 IndentLevel="{TemplateBinding GroupCount}"
+									 Visibility="Collapsed" />
+						</grid:GridViewScrollViewer.NewRow>
+						<grid:GridViewScrollViewer.FooterRow>
+							<grid:GridViewFooterRow x:Name="PART_FooterRow"
+									telerik:StyleManager.Theme="{StaticResource Theme}"
+									IndentLevel="{TemplateBinding GroupCount}" />
+						</grid:GridViewScrollViewer.FooterRow>
+						<treelist:TreeListViewVirtualizingPanel x:Name="PART_GridViewVirtualizingPanel" />
+					</grid:GridViewScrollViewer>
+
+					<grid:ScrollPositionIndicator x:Name="PART_ScrollPositionIndicator"
+												  telerik:StyleManager.Theme="{StaticResource Theme}"
+												  Margin="0,0,28,0" 
+												  IsHitTestVisible="False" HorizontalAlignment="Right" 
+												  Grid.Row="2" Grid.ColumnSpan="2"
+												  Visibility="{Binding IsScrolling, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"
+												  ContentTemplate="{TemplateBinding ScrollPositionIndicatorTemplate}" />
+
+				
+
+					<grid:GridViewLoadingIndicator x:Name="PART_GridViewLoadingIndicator" Visibility="Collapsed" telerik:StyleManager.Theme="{StaticResource Theme}"
+												   Grid.RowSpan="4" Grid.ColumnSpan="2" />
+					<Grid x:Name="DragBetweenItemsFeedback" Grid.Row="2" Height="8"
+											Visibility="Collapsed" HorizontalAlignment="Left"
+											IsHitTestVisible="False"
+											VerticalAlignment="Top"
+										Margin="{TemplateBinding Padding}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="8" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Ellipse Stroke="{StaticResource AccentBrush}"
+												StrokeThickness="2" HorizontalAlignment="Left"
+												VerticalAlignment="Center" Width="8" Height="8" />
+						<Rectangle Fill="{StaticResource AccentBrush}"
+												RadiusX="2" RadiusY="2" Margin="-2,3,0,0"
+												VerticalAlignment="Top" Height="2"
+												Grid.Column="1" />
+					</Grid>
+				</Grid>
+				
+			</Border>
+			
+		</AdornerDecorator>
+
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsBusy" Value="True">
+				<Setter TargetName="PART_GridViewLoadingIndicator" Property="Visibility" Value="Visible"/>
+			</Trigger>
+			<Trigger Property="IsBusy" Value="False">
+				<Setter TargetName="PART_GridViewLoadingIndicator" Property="Visibility" Value="Collapsed"/>
+			</Trigger>
+			<Trigger Property="ShowColumnFooters" Value="false">
+				<Setter Property="Visibility" Value="Collapsed" TargetName="PART_FooterRow"/>
+			</Trigger>
+			<Trigger Property="ShowColumnHeaders" Value="false">
+				<Setter Property="Visibility" Value="Collapsed" TargetName="PART_HeaderRow"/>
+			</Trigger>
+			<Trigger Property="ComputedVerticalScrollBarVisibility" SourceName="PART_ItemsScrollViewer" Value="Collapsed">
+				<Setter Property="Width" TargetName="ScrollBarColumn" Value="0" />
+			</Trigger>
+			<Trigger Property="ComputedHorizontalScrollBarVisibility" SourceName="PART_ItemsScrollViewer" Value="Collapsed">
+				<Setter Property="Height" TargetName="ScrollBarRow" Value="0" />
+				<Setter Property="Grid.RowSpan" TargetName="PART_ItemsScrollViewer" Value="1" />
+			</Trigger>
+			<Trigger Property="ShowInsertRow" Value="True">
+				<Setter TargetName="PART_AddNewRow" Property="Visibility" Value="Visible" />
+			</Trigger>
+		</ControlTemplate.Triggers>
+		
+	</ControlTemplate>
+
+
+	<Style TargetType="controls:RadTreeListView">
+
+		<Setter Property="Template" Value="{StaticResource RadTreeListViewTemplate}" />
+
+		<Setter Property="Background" Value="{StaticResource MainBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource BasicBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource StrongBrush}" />
+		<Setter Property="BorderThickness" Value="1" />
+		<Setter Property="GridLinesVisibility" Value="None"/>
+		<Setter Property="AlternateRowBackground" Value="#19767676" />
+		<Setter Property="VerticalGridLinesBrush" Value="{StaticResource BasicBrush}" />
+		<Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BasicBrush}"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="FontFamily" Value="Segoe UI Semibold" />
+		<Setter Property="FontSize" Value="12" />
+		
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		
+	</Style>
+
+	
+	
+</ResourceDictionary>

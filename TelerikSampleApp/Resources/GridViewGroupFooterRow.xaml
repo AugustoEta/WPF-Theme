@@ -1,0 +1,98 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					
+				
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"     
+					xmlns:grid="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:treelist="clr-namespace:Telerik.Windows.Controls.TreeListView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+>
+
+<telerik:MetroColors x:Key="MetroColors"/>
+<telerik:MetroTheme x:Key="Theme" />
+<SolidColorBrush x:Key="BasicBrush" telerik:MetroColors.Color="Basic" />
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="StrongBrush" telerik:MetroColors.Color="Strong" />
+
+	
+
+	<telerik:BooleanToOpacityConverter x:Key="BooleanToOpacityConverter" />
+	<telerik:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+	<DataTemplate x:Key="GridViewGroupFooterIndentCellDataTemplate">
+		<grid:GridViewGroupFooterIndentCell telerik:StyleManager.Theme="{StaticResource Theme}"/>
+	</DataTemplate>
+
+	<ControlTemplate x:Key="GridViewGroupFooterRowTemplate" TargetType="grid:GridViewGroupFooterRow">
+	
+			<grid:SelectiveScrollingGrid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+			<Border x:Name="PART_HierarchyIndent"
+						Width="25"
+						BorderBrush="{StaticResource BasicBrush}"						
+						BorderThickness="0,0,1,0" Grid.Column="1" 
+						Visibility="{Binding HasHierarchy, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BooleanToVisibilityConverter}}"
+						grid:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" />
+
+
+			<Border x:Name="PART_FooterRowBorder" 
+					Grid.Column="3"
+					BorderBrush="{TemplateBinding BorderBrush}"
+					BorderThickness="{TemplateBinding BorderThickness}"
+					Background="{TemplateBinding Background}"
+					Padding="{TemplateBinding Padding}" 
+					VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+					HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+
+					<Border x:Name="PART_IndicatorPresenter"
+						Width="25"
+						VerticalAlignment="Stretch"
+						Grid.Column="0"
+						Visibility="{TemplateBinding RowIndicatorVisibility}"
+						grid:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+						Grid.RowSpan="3"
+						BorderBrush="{StaticResource BasicBrush}"
+						Background="{StaticResource MainBrush}"
+						BorderThickness="0,0,1,0" />
+
+					
+					<grid:DataCellsPresenter x:Name="PART_DataCellsPresenter" 
+										 telerik:StyleManager.Theme="{StaticResource Theme}"
+										 Grid.Column="3" />
+
+					<grid:IndentPresenter x:Name="PART_IndentPresenter"
+									  telerik:StyleManager.Theme="{StaticResource Theme}"
+									  IndentLevel="{TemplateBinding IndentLevel}"
+									  ItemTemplate="{StaticResource GridViewGroupFooterIndentCellDataTemplate}" 
+									  Grid.Column="1"
+									  grid:SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical" />
+
+			</grid:SelectiveScrollingGrid>
+	
+	</ControlTemplate>
+
+	<Style TargetType="grid:GridViewGroupFooterRow">
+		<Setter Property="Template" Value="{StaticResource GridViewGroupFooterRowTemplate}" />
+
+		<Setter Property="Background" Value="{StaticResource MainBrush}" />
+		<Setter Property="BorderBrush" Value="{StaticResource BasicBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource StrongBrush}" />
+		<Setter Property="MinHeight" Value="28" />
+		<Setter Property="FontWeight" Value="Bold"/>
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="BorderThickness" Value="0,0,0,0" />
+		<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		
+	</Style>
+
+	
+	
+</ResourceDictionary>

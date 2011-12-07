@@ -1,0 +1,156 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					
+				
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"     
+					xmlns:grid="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:treelist="clr-namespace:Telerik.Windows.Controls.TreeListView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+>
+	
+<telerik:MetroColors x:Key="MetroColors"/>
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="AccentBrush" telerik:MetroColors.Color="Accent" />
+
+	
+    
+<ControlTemplate x:Key="CloseButtonTemplate" TargetType="Button">
+		<Border x:Name="CloseButton" Background="{TemplateBinding Background}">
+
+			
+
+			<Path Fill="{StaticResource MainBrush}" Stretch="Fill" x:Name="closebuttonpath" Opacity="0.7"
+					HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+					VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+					Width="6" Height="6" 
+					Data="M2.76155,0L8.32003,5.57469L13.895,0.0269933L16.482,2.623L10.9074,8.16956L16.4706,13.749L13.8736,16.331L8.31111,10.7527L2.58701,16.448L0,13.854L5.72388,8.15813L0.164554,2.58299z"/>
+		</Border>
+
+		
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsMouseOver" Value="True"/>
+			<Trigger Property="IsFocused" Value="True"/>
+			<Trigger Property="IsDefaulted" Value="True"/>
+			<Trigger Property="IsPressed" Value="True"/>
+			<Trigger Property="IsEnabled" Value="False"/>
+		</ControlTemplate.Triggers>
+		
+	</ControlTemplate>
+
+	<Style x:Key="ButtonCloseStyle" TargetType="Button">
+		<Setter Property="Template" Value="{StaticResource CloseButtonTemplate}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+	</Style>
+
+	<Storyboard x:Key="MouseOver">
+		<DoubleAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetName="PART_CloseButton" Storyboard.TargetProperty="Opacity">
+			<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+		</DoubleAnimationUsingKeyFrames>
+		<DoubleAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetName="OuterBorder" Storyboard.TargetProperty="Opacity">
+			<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+		</DoubleAnimationUsingKeyFrames>
+		<DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="ContentElement"  Storyboard.TargetProperty="Opacity">
+			<SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+		</DoubleAnimationUsingKeyFrames>
+		<DoubleAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+			<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="-7"/>
+		</DoubleAnimationUsingKeyFrames>
+	</Storyboard>
+	<Storyboard x:Key="MouseOut">
+		<DoubleAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetName="PART_CloseButton" Storyboard.TargetProperty="Opacity">
+			<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
+		</DoubleAnimationUsingKeyFrames>
+		<DoubleAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetName="ContentElement" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+			<SplineDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+		</DoubleAnimationUsingKeyFrames>
+	</Storyboard>
+
+	<ControlTemplate x:Key="GridViewGroupPanelCellTemplate" TargetType="grid:GridViewGroupPanelCell">
+		<Border x:Name="OuterBorder" Opacity="0.7" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+
+			
+
+			<Grid>
+				<Path x:Name="PART_SortIndicator" Data="M0,0 L4,0 L4,4 z" Stretch="Fill" RenderTransformOrigin="0.5,0.5" 
+					  Fill="{StaticResource MainBrush}" HorizontalAlignment="Center" Width="4" Height="4" 
+					  VerticalAlignment="Top" Margin="0,1,0,0" Opacity="0.7" Visibility="Collapsed">
+					<Path.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform />
+							<SkewTransform/>
+							<RotateTransform Angle="135"/>
+							<TranslateTransform />
+						</TransformGroup>
+					</Path.RenderTransform>
+				</Path>
+				<ContentControl x:Name="ContentElement" Content="{TemplateBinding Content}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Foreground="{TemplateBinding Foreground}" IsTabStop="{TemplateBinding IsTabStop}" Opacity="0.95">
+					<ContentControl.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</ContentControl.RenderTransform>
+				</ContentControl>
+				<Button x:Name="PART_CloseButton" Style="{StaticResource ButtonCloseStyle}" Margin="4,0" HorizontalAlignment="Right" VerticalAlignment="Center" Opacity="0" />
+			</Grid>
+
+		</Border>
+
+		
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Trigger.EnterActions>
+					<BeginStoryboard Storyboard="{StaticResource MouseOver}" />
+				</Trigger.EnterActions>
+				<Trigger.ExitActions>
+					<BeginStoryboard Storyboard="{StaticResource MouseOut}" />
+				</Trigger.ExitActions>
+			</Trigger>
+			<DataTrigger Binding="{Binding Path=SortDirection}" Value="Ascending">
+				<Setter Property="Visibility" TargetName="PART_SortIndicator" Value="Visible" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=SortDirection}" Value="Descending">
+				<Setter Property="Visibility" TargetName="PART_SortIndicator" Value="Visible" />
+				<Setter TargetName="PART_SortIndicator" Property="RenderTransform">
+					<Setter.Value>
+						<TransformGroup>
+							<ScaleTransform />
+							<SkewTransform/>
+							<RotateTransform Angle="-45"/>
+							<TranslateTransform Y="2" />
+						</TransformGroup>
+
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=SortDirection}" Value="{x:Null}">
+				<Setter Property="Visibility" TargetName="PART_SortIndicator" Value="Collapsed" />
+			</DataTrigger>
+		</ControlTemplate.Triggers>
+		
+	</ControlTemplate>
+
+	<Style TargetType="grid:GridViewGroupPanelCell">
+		<Setter Property="Template" Value="{StaticResource GridViewGroupPanelCellTemplate}" />
+		<Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="BorderBrush" Value="{StaticResource MainBrush}" />
+		<Setter Property="Padding" Value="20,0" />
+		<Setter Property="MinWidth" Value="95" />
+		<Setter Property="MinHeight" Value="22" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource MainBrush}" />
+		<Setter Property="FontFamily" Value="Segoe UI Semibold" />
+		<Setter Property="FontSize" Value="12" />
+		
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		
+	</Style>
+    
+	
+</ResourceDictionary>

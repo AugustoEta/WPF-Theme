@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					
+				
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"     
+					xmlns:grid="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:treelist="clr-namespace:Telerik.Windows.Controls.TreeListView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+>
+	
+<telerik:MetroColors x:Key="MetroColors"/>
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<telerik:MetroTheme x:Key="Theme" />
+
+	
+	<telerik:InvertedBooleanToOpacityConverter x:Key="InvertedBooleanToOpacityConverter" />
+	<ControlTemplate x:Key="GridViewGroupPanelItemTemplate" TargetType="grid:GridViewGroupPanelItem">
+		<StackPanel x:Name="PART_GroupPanelItemStackPanel" Orientation="Horizontal" 
+					VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+					Background="{TemplateBinding Background}">
+			<Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}">
+				<Grid.RowDefinitions>
+					<RowDefinition MinHeight="4" Height="Auto" />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<Path x:Name="PART_InsertionPoint" Data="M0,0 L4,0 L4,4 z" Stretch="Fill" RenderTransformOrigin="0.5,0.5" 
+					  Fill="{StaticResource MainBrush}" HorizontalAlignment="Center" Width="4" Height="4" 
+					  VerticalAlignment="Top" Margin="0,1,0,0" Opacity="0.7" 
+					  Visibility="{TemplateBinding InsertionPointVisibility}">
+					<Path.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform />
+							<SkewTransform/>
+							<RotateTransform Angle="135"/>
+							<TranslateTransform />
+						</TransformGroup>
+					</Path.RenderTransform>
+				</Path>
+				<Grid x:Name="PART_ConnectingLine" Opacity="{Binding IsFirst, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource InvertedBooleanToOpacityConverter}}" Grid.Row="1" Margin="0,0,0,1">
+					<Path Fill="{StaticResource MainBrush}" Opacity="0.7"  RenderTransformOrigin="0.5,0.5" Stretch="Fill" Stroke="{x:Null}"  Width="5" Data="M0,0L4,0L4,4z" Height="5" Margin="6,0,6,0">
+						<Path.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform />
+								<SkewTransform/>
+								<RotateTransform Angle="45"/>
+							</TransformGroup>
+						</Path.RenderTransform>
+					</Path>
+				</Grid>
+			</Grid>
+			<grid:GridViewGroupPanelCell Content="{TemplateBinding Content}"
+										 telerik:StyleManager.Theme="{StaticResource Theme}"
+										 SortDirection="{Binding Path=SortDirection}"
+										 x:Name="PART_Cell"/>
+		</StackPanel>
+	</ControlTemplate>
+
+	<Style TargetType="grid:GridViewGroupPanelItem">
+		<Setter Property="Template" Value="{StaticResource GridViewGroupPanelItemTemplate}" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Padding" Value="2,0,2,2" />
+		<Setter Property="VerticalContentAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Left" />
+	</Style>
+	
+	
+</ResourceDictionary>

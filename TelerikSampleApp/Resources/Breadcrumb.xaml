@@ -1,0 +1,668 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	    
+    xmlns:animation="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls"
+    xmlns:telerikTransitions="clr-namespace:Telerik.Windows.Controls.TransitionEffects;assembly=Telerik.Windows.Controls"
+    xmlns:telerikChromes="clr-namespace:Telerik.Windows.Controls.Chromes;assembly=Telerik.Windows.Controls"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+	xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:telerikNavigationPrimitives="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls.Navigation"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls"
+	xmlns:telerikToolBar="clr-namespace:Telerik.Windows.Controls.ToolBar;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:treeView="clr-namespace:Telerik.Windows.Controls.TreeView;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+	xmlns:themes="http://schemas.telerik.com/2008/xaml/presentation"
+    xmlns:mscorlib="clr-namespace:System;assembly=mscorlib"
+	xmlns:dragDrop="clr-namespace:Telerik.Windows.Controls.DragDrop;assembly=Telerik.Windows.Controls"
+	xmlns:telerikTabControl="clr-namespace:Telerik.Windows.Controls.TabControl;assembly=Telerik.Windows.Controls.Navigation"
+    xmlns:animationNavigation="clr-namespace:Telerik.Windows.Controls.Animation;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:book="clr-namespace:Telerik.Windows.Controls.Book;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:outlookBarPrimitives="clr-namespace:Telerik.Windows.Controls.OutlookBar;assembly=Telerik.Windows.Controls.Navigation"
+
+    xmlns:Telerik_Windows_Controls_TileView="clr-namespace:Telerik.Windows.Controls.TileView;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	xmlns:local="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:carousel="clr-namespace:Telerik.Windows.Controls.Carousel;assembly=Telerik.Windows.Controls.Navigation"
+	xmlns:telerikBreadcrumb="clr-namespace:Telerik.Windows.Controls.Breadcrumb;assembly=Telerik.Windows.Controls.Navigation"
+>
+
+<telerik:MetroColors x:Key="MetroColors" />
+<SolidColorBrush x:Key="AccentBrush" telerik:MetroColors.Color="Accent" />
+<SolidColorBrush x:Key="StrongBrush" telerik:MetroColors.Color="Strong" />
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="BasicBrush" telerik:MetroColors.Color="Basic" />
+<SolidColorBrush x:Key="MarkerBrush" telerik:MetroColors.Color="Marker" />
+<telerik:MetroTheme x:Key="Theme" />
+
+    
+    <telerik:BooleanToVisibilityConverter x:Key="visibilityConverter" />
+    <Style x:Key="imageStyle" TargetType="Image">
+        <Setter Property="MaxHeight" Value="16" />
+        <Setter Property="MaxWidth" Value="16" />
+    </Style>
+    <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Grid>
+                        <ContentPresenter x:Name="contentPresenter"
+										  Margin="{TemplateBinding Padding}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- split button style -->
+    <Style x:Key="toggleStyle" TargetType="telerik:RadToggleButton">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerik:RadToggleButton">
+                    <Grid SnapsToDevicePixels="True"
+                         >
+                        
+                        <Border x:Name="OuterBorder"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}" />
+                          
+                        <!-- checked -->
+                        <Border x:Name="CheckedVisual" Opacity="0" Background="{StaticResource AccentBrush}" />
+                           
+                        <Path x:Name="DropDownIndicator"
+							  IsHitTestVisible="False"
+							  Fill="{StaticResource StrongBrush}"
+							  HorizontalAlignment="Center"
+							  VerticalAlignment="Center"
+							  RenderTransformOrigin="0.5,0.5"
+							  Margin="5,3,5,3"
+							  Data="M0,0 L5,0 5,1 4,1 4,2 3,2 3,3 2,3 2,2 1,2 1,1 0,1 0,0 z"
+							  SnapsToDevicePixels="True"
+                             >
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="-90" />
+                            </Path.RenderTransform>
+                        </Path>
+
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush"  Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckedVisual" Property="Opacity" Value="1" />
+                            <Setter TargetName="DropDownIndicator" Property="Fill"  Value="{StaticResource MainBrush}" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="Arrow_down">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="DropDownIndicator"
+									Storyboard.TargetProperty="(FrameworkElement.RenderTransform).Angle" To="0" Duration="0:0:0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <RemoveStoryboard BeginStoryboardName="Arrow_down"/>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEnabled"  Value="False" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="DropDownIndicator" Property="Opacity" Value="0.5" />
+                        </MultiTrigger>
+                        <Trigger Property="IsMouseOver"  Value="true">
+                            <Setter TargetName="OuterBorder" Property="Background"
+									Value="{StaticResource BasicBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="OuterBorder" Property="Background"
+									Value="{StaticResource BasicBrush}" />
+                        </Trigger>
+
+                        <Trigger Property="IsEnabled"  Value="False">
+                            <Setter TargetName="OuterBorder" Property="BorderThickness"  Value="0" />
+                            <Setter TargetName="DropDownIndicator" Property="Opacity" Value="0.5" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True" />
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition Property="IsPressed" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="CheckedVisual" Property="Opacity" Value="1" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SplitButtonStyle" TargetType="telerik:RadSplitButton">
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="IsOpen" Value="false" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource StrongBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="TogglePartStyle" Value="{StaticResource toggleStyle}" />
+    </Style>
+    <!-- end split button style -->
+    <!-- split overflow button style -->
+    <Style x:Key="SplitButtonOverflowStyle" TargetType="telerik:RadSplitButton">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsOpen" Value="false" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="MinWidth" Value="14" />
+        <Setter Property="MaxWidth" Value="150" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="DropDownMaxHeight" Value="700" />
+        <Setter Property="DropDownMaxWidth" Value="400" />
+        <Setter Property="Foreground" Value="{StaticResource StrongBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerik:RadSplitButton">
+                    <Grid>
+                        
+                        <Border x:Name="Border"
+								Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								CornerRadius="{TemplateBinding CornerRadius}"
+								DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
+								Visibility="{Binding IsBackgroundVisible, Converter={StaticResource visibilityConverter}}" />
+                        <telerik:RadToggleButton Background="Transparent"
+												 BorderBrush="Transparent"
+												 x:Name="DropDownPart"
+												 IsTabStop="false"
+												 MinWidth="11"
+												 MinHeight="7"
+												 Padding="0 3"
+												 Visibility="{TemplateBinding DropDownIndicatorVisibility}"
+												 IsChecked="{Binding Path=IsOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            <Grid>
+                                <Path x:Name="DropDownIndicator"
+									  IsHitTestVisible="False"
+									  Fill="{StaticResource StrongBrush}"
+									  HorizontalAlignment="Center"
+									  VerticalAlignment="Center"
+									  Data="M3,0 L4,0 L4,1 L3,1 z M2,0 L3,0 L3,1 L2,1 z M2,1 L3,1 L3,2 L2,2 z M1,1 L2,1 L2,2 L1,2 z M1,2 L2,2 L2,3 L1,3 z M0,2 L1,2 L1,3 L0,3 z M2,3 L3,3 L3,4 L2,4 z M1,3 L2,3 L2,4 L1,4 z M3,4 L4,4 L4,5 L3,5 z M2,4 L3,4 L3,5 L2,5 z M7,0 L8,0 L8,1 L7,1 z M6,0 L7,0 L7,1 L6,1 z M6,1 L7,1 L7,2 L6,2 z M5,1 L6,1 L6,2 L5,2 z M5,2 L6,2 L6,3 L5,3 z M4,2 L5,2 L5,3 L4,3 z M6,3 L7,3 L7,4 L6,4 z M5,3 L6,3 L6,4 L5,4 z M7,4 L8,4 L8,5 L7,5 z M6,4 L7,4 L7,5 L6,5 z" />
+                            </Grid>
+                        </telerik:RadToggleButton>
+                        
+                        <Popup x:Name="DropDownPopup"
+							   AllowsTransparency="True"
+							   StaysOpen="False"
+							   Focusable="false"
+							   Placement="Bottom"
+							   IsOpen="{Binding Path=IsOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}">
+                            
+                            
+                                <Grid MinHeight="20">
+                                    <Border x:Name="DropDownPopupBorder"
+											BorderThickness="1"
+											BorderBrush="{StaticResource BasicBrush}"
+											Background="{StaticResource MainBrush}"
+											CornerRadius="{TemplateBinding CornerRadius}"
+											Margin="0,1,4,4"
+											MinWidth="3"
+											MinHeight="3"
+											Width="{TemplateBinding DropDownWidth}"
+											Height="{TemplateBinding DropDownHeight}"
+											MaxWidth="{TemplateBinding DropDownMaxWidth}"
+											MaxHeight="{TemplateBinding DropDownMaxHeight}">
+                                        <ContentPresenter x:Name="DropDownPopupContent"
+														  Content="{TemplateBinding DropDownContent}"
+														  ContentTemplate="{TemplateBinding DropDownContentTemplate}"
+														  HorizontalAlignment="Stretch"
+														  VerticalAlignment="Stretch"
+														  DataContext="{Binding DataContext, RelativeSource={RelativeSource TemplatedParent}}" />
+                                    </Border>
+                                </Grid>
+                                
+                            
+                        </Popup>
+                        
+                        <!-- Focus -->
+                        <Border BorderThickness="1"
+								Opacity="0"
+								x:Name="FocusState"
+								BorderBrush="{StaticResource MarkerBrush}" />
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsOpen" Value="True">
+                            <Setter TargetName="DropDownIndicator" Property="Fill" 
+									Value="{StaticResource MainBrush}" />
+                            <Setter Property="Canvas.ZIndex" TargetName="DropDownPart" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True" />
+
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- end split button style -->
+    <Style x:Key="textButton"
+		   TargetType="telerik:RadButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerik:RadButton">
+                    <ContentPresenter x:Name="Content"
+									  Grid.ColumnSpan="2"
+									  Content="{TemplateBinding Content}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="textSplitButton" TargetType="telerik:RadSplitButton">
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="IsOpen" Value="false" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource StrongBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="3" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerik:RadSplitButton">
+                    <Grid>
+                        
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <telerik:RadToggleButton x:Name="DropDownPart"
+													 IsTabStop="false"
+													 Margin="0,-1,0,0"
+													 Grid.Column="1"
+													 Grid.Row="2"
+													 MinWidth="11"
+													 MinHeight="7"
+													 Visibility="{TemplateBinding DropDownIndicatorVisibility}"
+													 Style="{TemplateBinding TogglePartStyle}"
+													 IsChecked="{Binding Path=IsOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"></telerik:RadToggleButton>
+                            <telerik:RadButton x:Name="ButtonPart"
+											   Grid.Row="1"
+											   Grid.Column="1"
+											   Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay,
+															Path=IsButtonPartVisible, Converter={StaticResource visibilityConverter}}"
+											   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+											   Style="{StaticResource textButton}"
+											   Padding="{TemplateBinding Padding}"
+											   Foreground="{TemplateBinding Foreground}"
+											   Content="{TemplateBinding Content}"
+											   ContentTemplate="{TemplateBinding ContentTemplate}"
+											   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"></telerik:RadButton>
+                        </Grid>
+                        
+                        <Popup x:Name="DropDownPopup"
+							   AllowsTransparency="True"
+							   StaysOpen="False"
+							   Focusable="false"
+							   Placement="Bottom"
+							   IsOpen="{Binding Path=IsOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            
+                            
+                                <Grid>
+                                    <Border x:Name="DropDownPopupBorder"
+											BorderThickness="1"
+											BorderBrush="{StaticResource BasicBrush}"
+											Background="{StaticResource MainBrush}"
+											CornerRadius="0"
+											Margin="0"
+											MinWidth="3"
+											MinHeight="3"
+											Width="{TemplateBinding DropDownWidth}"
+											Height="{TemplateBinding DropDownHeight}"
+											MaxWidth="{TemplateBinding DropDownMaxWidth}"
+											MaxHeight="{TemplateBinding DropDownMaxHeight}">
+                                        <ContentPresenter x:Name="DropDownPopupContent"
+														  Content="{TemplateBinding DropDownContent}"
+														  ContentTemplate="{TemplateBinding DropDownContentTemplate}"
+														  HorizontalAlignment="Stretch"
+														  VerticalAlignment="Stretch"
+														  DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=DataContext}" />
+                                    </Border>
+                                </Grid>
+                                
+                            
+                        </Popup>
+                        
+
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False" />
+                        <Trigger Property="IsOpen" Value="True" >
+                            <Setter Property="Canvas.ZIndex" TargetName="DropDownPart" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True" />
+                        <Trigger Property="DropDownButtonPosition" Value="Right">
+                            <Setter TargetName="DropDownPart" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="DropDownPart" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="DropDownPart" Property="Margin" Value="-1,0,0,0" />
+                        </Trigger>
+                        <Trigger Property="IsButtonPartVisible" Value="False">
+                            <Setter TargetName="DropDownPart" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="DropDownPart" Property="Grid.ColumnSpan" Value="3" />
+                            <Setter TargetName="DropDownPart" Property="IsTabStop" Value="True" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True" />
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="BarItemControlTemplate"  TargetType="telerikBreadcrumb:RadBreadcrumbBarItem">
+        <Grid>
+            
+            <telerik:RadSplitButton x:Name="SplitButton"
+									Margin="0" 
+									Foreground="{TemplateBinding Foreground}"
+									Command="telerikBreadcrumb:RadBreadcrumbCommands.ClearSelectedItem"
+									Content="{TemplateBinding Header}"
+									ContentTemplate="{TemplateBinding HeaderTemplate}"
+									IsOpen="{Binding Path=IsPopupOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+									Style="{TemplateBinding SplitButtonStyle}">
+                <telerik:RadSplitButton.DropDownContent>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+								  MaxWidth="270"
+								  MinWidth="200"
+								  Padding="0"
+								  BorderThickness="0"
+								  VerticalScrollBarVisibility="Auto">
+                            <ItemsPresenter Margin="3" />
+                    </ScrollViewer>
+                </telerik:RadSplitButton.DropDownContent>
+            </telerik:RadSplitButton>
+        </Grid>
+        
+        <ControlTemplate.Triggers>
+            <Trigger Property="HasItems"
+					 Value="False">
+                <Setter TargetName="SplitButton"
+						Property="DropDownIndicatorVisibility"
+						Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsLinearMode"
+					 Value="True">
+                <Setter TargetName="SplitButton"
+						Property="DropDownIndicatorVisibility"
+						Value="Collapsed" />
+            </Trigger>
+            <Trigger Property="IsButtonPartHidden"
+					 Value="True">
+                <Setter TargetName="SplitButton"
+						Property="IsButtonPartVisible"
+						Value="False" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+        
+    </ControlTemplate>
+    <ControlTemplate x:Key="DropDownItemControlTemplate" TargetType="telerikBreadcrumb:RadBreadcrumbBarItem">
+        <Grid>
+            
+            <Border x:Name="headerContainer" Background="Transparent">
+                <Grid  Margin="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="32" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image Style="{StaticResource imageStyle}"
+							HorizontalAlignment="Left"
+							Margin="0 0 10 0"
+							Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Image}"
+							Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsIconVisible,
+									Converter={StaticResource visibilityConverter}}" />
+                    <ContentControl x:Name="contentControl"
+									Grid.Column="1"
+									Content="{TemplateBinding DropDownHeader}"
+									ContentTemplate="{TemplateBinding DropDownHeaderTemplate}" />
+                </Grid>
+            </Border>
+        </Grid>
+        
+        <ControlTemplate.Triggers>
+            <Trigger Property="ShouldHighlight"
+					 Value="true">
+                <Setter TargetName="headerContainer"
+						Property="Background"
+						Value="{StaticResource BasicBrush}" />
+            </Trigger>
+            <Trigger Property="IsSelected"
+					 Value="true">
+                <Setter TargetName="contentControl"
+						Property="FontWeight"
+						Value="Bold" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+        
+    </ControlTemplate>
+    <Style TargetType="telerikNavigation:RadBreadcrumb" >
+        <Setter Property="BorderThickness"
+				Value="1" />
+        <Setter Property="BorderBrush"
+				Value="{StaticResource BasicBrush}" />
+        <Setter Property="Background"
+				Value="Transparent" />
+        
+        <Setter Property="FocusVisualStyle"
+				Value="{x:Null}" />
+        <Setter Property="Focusable"
+				Value="False" />
+        
+		<Setter Property="Foreground"
+				Value="{StaticResource MarkerBrush}" />
+		<Setter Property="BarItemControlTemplate"
+				Value="{StaticResource BarItemControlTemplate}" />
+        <Setter Property="DropDownItemControlTemplate"
+				Value="{StaticResource DropDownItemControlTemplate}" />
+        <Setter Property="SplitButtonStyle"
+				Value="{StaticResource SplitButtonStyle}" />
+        <Setter Property="IsTabStop"
+				Value="False" />
+        <Setter Property="MinWidth"
+				Value="150" />
+        <Setter Property="OverflowButtonStyle"
+				Value="{StaticResource SplitButtonOverflowStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerikNavigation:RadBreadcrumb">
+                    <Grid x:Name="outerGrid">
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border Background="{TemplateBinding Background}"
+								Grid.ColumnSpan="3"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}" />
+                        <Image x:Name="image"
+							   Margin="5 0"
+							   Style="{StaticResource imageStyle}"
+							   Source="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=CurrentContainer.Image}"
+							   Visibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=IsCurrentIconVisible,
+									 Converter={StaticResource visibilityConverter}}" />
+                        <telerikBreadcrumb:RadBreadcrumbBar x:Name="BreadcrumbBar"
+															Foreground="{TemplateBinding Foreground}"
+															Grid.Column="1"
+															ItemTemplate="{TemplateBinding ItemTemplate}" />
+                        <telerik:RadSplitButton x:Name="historySplitButton" 
+												Style="{StaticResource textSplitButton}"
+												Grid.Column="1" 
+												Grid.ColumnSpan="2">
+                            <telerik:RadSplitButton.Content>
+                                <TextBox BorderThickness="0" MinHeight="20"
+                                    Margin="1"
+                                    telerik:StyleManager.Theme="{StaticResource Theme}"
+										 x:Name="pathTextBox" />
+                            </telerik:RadSplitButton.Content>
+                            <telerik:RadSplitButton.DropDownContent>
+                                <ListBox BorderThickness="0"
+										 x:Name="HistoryListBox"
+										 ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+										 ItemsSource="{TemplateBinding HistoryItems}"
+										 Padding="2"
+										 HorizontalContentAlignment="Stretch"
+										 SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SelectedHistoryItem, Mode=TwoWay}" />
+                            </telerik:RadSplitButton.DropDownContent>
+                        </telerik:RadSplitButton>
+                        
+                        <Popup x:Name="AutocompletePopup"
+							   Placement="Bottom"
+							   AllowsTransparency="True"
+							   StaysOpen="False"
+							   Focusable="false"
+							   IsOpen="{Binding Path=IsAutocompleteOpen, RelativeSource={RelativeSource TemplatedParent}}">
+                            
+                            
+                                <ListBox x:Name="AutoCompleteListBox"
+										  
+										 BorderThickness="1"
+										 BorderBrush="{StaticResource BasicBrush}"
+										 ItemsSource="{TemplateBinding AutoCompleteItems}"
+										 MaxWidth="650"
+										 MaxHeight="500"
+										 MinHeight="30"
+										 MinWidth="100"
+										 ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+										 SelectedItem="{Binding RelativeSource={RelativeSource TemplatedParent},
+											 Path=SelectedAutoCompleteItem, Mode=TwoWay}" />
+                                
+                            
+                        </Popup>
+                        
+                        <telerik:RadToggleButton x:Name="historyToggle"
+												 Grid.Column="3"
+												 Width="15"
+												 Background="Transparent"
+												 BorderBrush="Transparent"
+												 Command="telerikBreadcrumb:RadBreadcrumbCommands.HistoryDropDown">
+                            <telerik:RadToggleButton.Content>
+                                <Path x:Name="DropDownIndicator"
+									  IsHitTestVisible="False"
+									  Fill="{StaticResource StrongBrush}"
+									  HorizontalAlignment="Center"
+									  VerticalAlignment="Center"
+									  RenderTransformOrigin="0.5,0.5"
+									  Data="M0,0 L5,0 5,1 4,1 4,2 3,2 3,3 2,3 2,2 1,2 1,1 0,1 0,0 z"
+											SnapsToDevicePixels="True"
+                                     />
+                            </telerik:RadToggleButton.Content>
+                        </telerik:RadToggleButton>
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsTextMode"
+								 Value="true">
+                            <Setter TargetName="historySplitButton"
+									Property="Visibility"
+									Value="Visible" />
+                            <Setter TargetName="BreadcrumbBar"
+									Property="Visibility"
+									Value="Collapsed" />
+                            <Setter TargetName="historyToggle"
+									Property="Visibility"
+									Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsTextMode"
+								 Value="False">
+                            <Setter TargetName="historySplitButton"
+									Property="Visibility"
+									Value="Collapsed" />
+                            <Setter TargetName="BreadcrumbBar"
+									Property="Visibility"
+									Value="Visible" />
+                            <Setter TargetName="historyToggle"
+									Property="Visibility"
+									Value="Visible" />
+                            <Setter TargetName="historyToggle"
+									Property="IsChecked"
+									Value="False" />
+                        </Trigger>
+                        <Trigger Property="IsAutocompleteOpen"
+								 Value="True">
+                            <Setter Property="Canvas.ZIndex"
+									TargetName="historySplitButton"
+									Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsTextModeEnabled"
+								 Value="False">
+                            <Setter TargetName="historyToggle"
+									Property="Visibility"
+									Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="telerikBreadcrumb:RadBreadcrumbBar">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="IsTabStop"
+				Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerikBreadcrumb:RadBreadcrumbBar">
+                    <Border Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+                        <ItemsPresenter x:Name="ItemsPresented" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="telerikBreadcrumb:RadBreadcrumbBarItem">
+        <Setter Property="Background"
+				Value="Transparent" />
+    </Style>
+
+    
+    
+</ResourceDictionary>

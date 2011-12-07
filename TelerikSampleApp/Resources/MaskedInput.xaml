@@ -1,0 +1,269 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		
+                            xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+                            xmlns:sys="clr-namespace:System;assembly=mscorlib"
+							
+							
+							xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+							xmlns:calendar="clr-namespace:Telerik.Windows.Controls.Calendar;assembly=Telerik.Windows.Controls.Input"
+							xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero"
+							xmlns:telerikChromes="clr-namespace:Telerik.Windows.Controls.Chromes;assembly=Telerik.Windows.Controls"
+							xmlns:primitives="clr-namespace:Telerik.Windows.Controls.Primitives;assembly=Telerik.Windows.Controls"
+							xmlns:telerikMaskedTextBox="clr-namespace:Telerik.Windows.Controls.MaskedTextBox;assembly=Telerik.Windows.Controls.Input"
+                            xmlns:telerikMaskedInput="clr-namespace:Telerik.Windows.Controls.MaskedInput;assembly=Telerik.Windows.Controls.Input"                           
+                            xmlns:telerikRating="clr-namespace:Telerik.Windows.Controls.Rating;assembly=Telerik.Windows.Controls.Input"
+>
+
+<telerik:MetroColors x:Key="MetroColors" />
+<SolidColorBrush x:Key="MarkerBrush" telerik:MetroColors.Color="Marker" />
+<telerik:MetroTheme x:Key="Theme" />
+<SolidColorBrush x:Key="BasicBrush" telerik:MetroColors.Color="Basic" />
+<SolidColorBrush x:Key="MainBrush" telerik:MetroColors.Color="Main" />
+<SolidColorBrush x:Key="StrongBrush" telerik:MetroColors.Color="Strong" />
+
+    
+    <telerikMaskedInput:HorizontalContentAlignmentToTextAlignmentConverter x:Key="conv"/>
+    <telerik:BooleanToVisibilityConverter x:Key="boolToVisConverter"/>
+
+    <Style x:Key="TextBoxStyle" TargetType="telerikMaskedInput:PreviewInputTextBox">
+        <Setter Property="Foreground" Value="{StaticResource MarkerBrush}"/>
+        <Setter Property="FontFamily" Value="Segoe UI Semibold" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="MinHeight" Value="22" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerikMaskedInput:PreviewInputTextBox">
+                    <Grid x:Name="RootElement">
+                        
+                        <Grid Background="{TemplateBinding Background}" Height="{TemplateBinding Height}">
+                            <Border x:Name="ReadOnlyVisualElement" Opacity="0" />
+                            <Border BorderBrush="Transparent" BorderThickness="1" Margin="-1">
+                                <ScrollViewer telerik:StyleManager.Theme="{StaticResource Theme}"
+								Padding="{TemplateBinding Padding}" BorderThickness="0"
+								Foreground="{TemplateBinding Foreground}" Background="Transparent"
+								VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+								HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                
+                                    
+                                    x:Name="PART_ContentHost"
+                                    
+                                    />
+                            </Border>
+                        </Grid>
+                    </Grid>
+
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter Property="Opacity" TargetName="ReadOnlyVisualElement" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="ClearButtonTemplate" TargetType="telerik:RadButton">
+        <Grid x:Name="ButtonBorder" Background="Transparent" >
+            
+            <Path x:Name="Path" Stretch="Fill" Stroke="{StaticResource BasicBrush}" Margin="4" RenderTransformOrigin="0.5,0.5"
+					Data="M4.0551758,5.1411133 L4.9467773,5.1411133 L4.9467773,8.0683594 L7.8740234,8.0683594 L7.8740234,8.9277344 L4.9467773,8.9277344 L4.9467773,11.85498 L4.0551758,11.85498 L4.0551758,8.9277344 L1.1279297,8.9277344 L1.1279297,8.0683594 L4.0551758,8.0683594 z">
+                <Path.RenderTransform>
+                    <RotateTransform Angle="-45" />
+                </Path.RenderTransform>
+            </Path>
+        </Grid>
+
+        
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True" />
+            <Trigger Property="IsPressed"  Value="True" />
+            <Trigger Property="IsEnabled" Value="false" />
+        </ControlTemplate.Triggers>
+        
+    </ControlTemplate>
+    <Style x:Key="ClearButtonStyle" TargetType="telerik:RadButton">
+        <Setter Property="Template" Value="{StaticResource ClearButtonTemplate}" />
+        <Setter Property="Width" Value="19" />
+        <Setter Property="Height" Value="19" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Margin" Value="0,0,3,0" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <Style TargetType="telerikInput:RadMaskedInputBase" x:Key="RadMaskedInputBaseStyle" >
+        <Setter Property="BorderBrush" Value="{StaticResource BasicBrush}" />
+        <Setter Property="Background" Value="{StaticResource MainBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource MarkerBrush}"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="TextBoxStyle" Value="{StaticResource TextBoxStyle}" />
+        <Setter Property="ClearButtonStyle" Value="{StaticResource ClearButtonStyle}"/>
+        <Setter Property="MinHeight" Value="22" />
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Padding" Value="5 2" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsReadOnly" Value="False" />
+        <Setter Property="TextMode" Value="MaskedText"/>
+        <Setter Property="ErrorMessageTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" Foreground="White" FontSize="12"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="telerikInput:RadMaskedInputBase">
+                    <Grid>
+                        
+
+                        <Border x:Name="Border" BorderThickness="{TemplateBinding BorderThickness}"
+								Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding BorderBrush}" 
+                                  SnapsToDevicePixels="True"  >
+
+                            <Grid x:Name="GridContainer">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <telerikMaskedInput:PreviewInputTextBox x:Name="EditorSite" TabIndex="{TemplateBinding TabIndex}" 
+                                    IsTabStop="True" AcceptsReturn="True"
+                                    IsEnabled="{TemplateBinding IsEnabled}"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    IsReadOnly="{TemplateBinding IsReadOnly}"
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{TemplateBinding Background}"
+                                    Height="{TemplateBinding Height}"
+                                    TextAlignment="{Binding HorizontalContentAlignment, Converter={StaticResource conv}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Style="{TemplateBinding TextBoxStyle}"
+                                    FontFamily="{TemplateBinding FontFamily}"
+                                    FontSize="{TemplateBinding FontSize}"
+                                    FontWeight="{TemplateBinding FontWeight}"
+                                 />
+                                <Border IsHitTestVisible="False" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" x:Name="DisplayTextContent" Visibility="Collapsed">
+                                    <telerikMaskedInput:PreviewInputTextBox x:Name="DisplayText"
+                                            Text="{Binding Path=Text, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" 
+                                            IsTabStop="False"
+                                            Padding="{TemplateBinding Padding}" 
+                                            IsEnabled="{TemplateBinding IsEnabled}"
+                                            Background="{TemplateBinding Background}"                       
+                                            Foreground="{TemplateBinding Foreground}"
+                                            IsReadOnly="{TemplateBinding IsReadOnly}"
+                                            Style="{TemplateBinding TextBoxStyle}"
+                                            Height="{TemplateBinding Height}"
+                                            TextAlignment="{Binding HorizontalContentAlignment, Converter={StaticResource conv}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            FontFamily="{TemplateBinding FontFamily}"
+                                            FontSize="{TemplateBinding FontSize}"
+                                            FontWeight="{TemplateBinding FontWeight}"/>
+
+                                </Border>
+                                <Border IsHitTestVisible="False" x:Name="EmptyContent"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Visibility="Collapsed"
+                                Padding="5,0,0,0">
+                                    <ContentControl x:Name="Content"
+                                        Content="{TemplateBinding EmptyContent}"
+                                        ContentTemplate="{TemplateBinding EmptyContentTemplate}"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Foreground="{TemplateBinding Foreground}"
+										Margin="{TemplateBinding Padding}"                                            
+                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        FontStyle="Italic"
+                                        />
+                                </Border>
+
+                                <telerik:RadButton x:Name="ClearButton" IsEnabled="{TemplateBinding IsEnabled}"
+                                Command="{TemplateBinding ClearCommand}" IsTabStop="False"
+                                Style="{TemplateBinding ClearButtonStyle}"
+                                Opacity="0" Grid.Column="1"
+                                Visibility="{Binding Path=IsClearButtonVisible, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisConverter}}">
+                                </telerik:RadButton>
+                            </Grid>
+                        </Border>
+
+                        <Border x:Name="FocusedVisual" Opacity="0" BorderBrush="{StaticResource MarkerBrush}"
+								BorderThickness="{TemplateBinding BorderThickness}" />
+
+                        
+                       
+                    </Grid>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="FocusedVisual" Property="Opacity" Value="0.2" />
+                            <Setter TargetName="DisplayTextContent" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="Border" Value="{StaticResource StrongBrush}" />
+                            <Setter TargetName="ClearButton" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsKeyboardFocusWithin" Value="False" />
+                                <Condition Property="IsEmpty" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="EmptyContent" Value="Visible" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="True" >
+                            <Setter TargetName="ClearButton" Property="Opacity" Value="0" />
+                        </Trigger>
+                        <Trigger Property="HasErrors" Value="True">
+                            <Setter Property="BorderBrush" Value="Red"/>
+                            <Setter Property="ToolTip" Value="{Binding DisplayErrorMessage, RelativeSource={RelativeSource Mode=Self}}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="Border" Value="0.5" />
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="Border" Property="Background"  Value="Transparent" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="Transparent" />
+                            <Setter TargetName="EditorSite" Property="Background" Value="Transparent" />
+                            <Setter TargetName="DisplayText" Property="Background" Value="Transparent" />
+                            <Setter TargetName="EmptyContent" Property="Background" Value="Transparent" />
+                            <Setter TargetName="ClearButton" Property="Opacity" Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="telerikInput:RadMaskedNumericInput" BasedOn="{StaticResource RadMaskedInputBaseStyle}">
+        <Setter Property="InputBehavior" Value="Insert"/>
+        <Setter Property="Mask" Value="#9.2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+    </Style>
+
+    <Style TargetType="telerikInput:RadMaskedCurrencyInput" BasedOn="{StaticResource RadMaskedInputBaseStyle}">
+        <Setter Property="InputBehavior" Value="Insert"/>
+        <Setter Property="Mask" Value="c9.2"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+    </Style>
+
+    <Style TargetType="telerikInput:RadMaskedDateTimeInput" BasedOn="{StaticResource RadMaskedInputBaseStyle}">
+        <Setter Property="Mask" Value="d"/>
+        <Setter Property="SpinMode" Value="Position"/>
+    </Style>
+
+    <Style TargetType="telerikInput:RadMaskedTextInput" BasedOn="{StaticResource RadMaskedInputBaseStyle}">
+        <Setter Property="Mask" Value="a20"/>
+        <Setter Property="SpinMode" Value="None"/>
+        <Setter Property="SelectionOnFocus" Value="CaretToBeginning"/>
+    </Style>
+
+    
+</ResourceDictionary>

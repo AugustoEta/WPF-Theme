@@ -1,0 +1,43 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					
+				
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"     
+					xmlns:grid="clr-namespace:Telerik.Windows.Controls.GridView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:treelist="clr-namespace:Telerik.Windows.Controls.TreeListView;assembly=Telerik.Windows.Controls.GridView"
+					xmlns:controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+					
+				
+				
+			
+	>
+	<telerik:MetroColors x:Key="MetroColors"/>
+	<SolidColorBrush x:Key="StrongBrush" telerik:MetroColors.Color="Strong" />
+
+	
+
+	<ControlTemplate x:Key="FrozenColumnsSplitterTemplate" TargetType="grid:FrozenColumnsSplitter">
+		<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Width="5">
+			<Border Background="{TemplateBinding Background}" Opacity="0.2" Width="4" />
+		</Border>
+	</ControlTemplate>
+
+	<Style
+    
+		x:Key="{telerik:ThemeResourceKey ThemeType=
+		telerik:Office_BlackTheme , ElementType=grid:FrozenColumnsSplitter}"
+		
+		TargetType="grid:FrozenColumnsSplitter">
+		<Setter Property="Template" Value="{StaticResource FrozenColumnsSplitterTemplate}" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="BorderThickness" Value="1,0,0,0"/>
+		<Setter Property="BorderBrush" Value="{StaticResource StrongBrush}"/>
+		<Setter Property="Background" Value="{StaticResource StrongBrush}" />
+		
+		<Setter Property="SnapsToDevicePixels" Value="True" />
+		
+	</Style>
+
+	
+	
+</ResourceDictionary>

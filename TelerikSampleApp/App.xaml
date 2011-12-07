@@ -1,0 +1,93 @@
+﻿<Application
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	x:Class="TelerikSampleApp.App"
+	StartupUri="MainWindow.xaml">
+	<Application.Resources>
+		<!-- Resources scoped at the Application level should be defined here. -->
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				
+				<!-- Telerik Controls -->
+				<ResourceDictionary Source="Resources/AggregateResultsList.xaml"/>
+				<ResourceDictionary Source="Resources/Button.xaml"/>
+				<ResourceDictionary Source="Resources/ButtonChrome.xaml"/>
+				<ResourceDictionary Source="Resources/Chart.3D.xaml"/>
+				<ResourceDictionary Source="Resources/Chart.xaml"/>
+				<ResourceDictionary Source="Resources/ChildDataControlsPresenter.xaml"/>
+				<ResourceDictionary Source="Resources/ComboBox.xaml"/>
+				<ResourceDictionary Source="Resources/DataCellsPresenter.xaml"/>
+				<ResourceDictionary Source="Resources/DateTimePicker.xaml"/>
+				<ResourceDictionary Source="Resources/DistinctFilterControl.xaml"/>
+				<ResourceDictionary Source="Resources/Docking.xaml"/>
+				<ResourceDictionary Source="Resources/DragDrop.xaml"/>
+				<ResourceDictionary Source="Resources/DraggedElement.xaml"/>
+				<ResourceDictionary Source="Resources/Expander.xaml"/>
+				<ResourceDictionary Source="Resources/FilteringControl.xaml"/>
+				<ResourceDictionary Source="Resources/FrozenColumnSplitter.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewAggregateResultCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewCheckBox.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewDataControl.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewEditorPresenter.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewFilteringDropDown.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewFooterCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewFooterIndentCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewFooterRow.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewGroupFooterCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewGroupFooterIndentCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewGroupFooterRow.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewGroupPanel.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewGroupPanelCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewGroupPanelItem.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewGroupRow.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewHeaderCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewHeaderIndentCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewHeaderRow.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewIndentCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewIndicatorCell.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewLoadingIndicator.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewNewRow.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewRow.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewScrollViewer.xaml"/>
+				<ResourceDictionary Source="Resources/GridViewToggleButton.xaml"/>
+				<ResourceDictionary Source="Resources/Label.xaml"/>
+				<ResourceDictionary Source="Resources/LayoutTransformControl.xaml"/>
+				<ResourceDictionary Source="Resources/LookupElement.xaml"/>
+				<ResourceDictionary Source="Resources/MaskedInput.xaml"/>
+				<ResourceDictionary Source="Resources/MaskedTextBox.xaml"/>
+				<ResourceDictionary Source="Resources/Menu.xaml"/>
+				<ResourceDictionary Source="Resources/PanelBar.xaml"/>
+				<ResourceDictionary Source="Resources/PickerTextBox.xaml"/>
+				<ResourceDictionary Source="Resources/PickerToggleButton.xaml"/>
+				<ResourceDictionary Source="Resources/ProgressBar.xaml"/>
+				<ResourceDictionary Source="Resources/RadGridView.xaml"/>
+				<ResourceDictionary Source="Resources/RadPropertyGrid.xaml"/>
+				<ResourceDictionary Source="Resources/RadTreeListView.xaml"/>
+				<ResourceDictionary Source="Resources/Ribbonbar.xaml"/>
+				<ResourceDictionary Source="Resources/RibbonView.xaml"/>
+				<ResourceDictionary Source="Resources/RichTextBox.xaml"/>
+				<ResourceDictionary Source="Resources/RichTextBoxRuler.xaml"/>
+				<ResourceDictionary Source="Resources/RichTextBoxStatusBar.xaml"/>
+				<ResourceDictionary Source="Resources/ScrollPositionIndicator.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.Button.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.CheckBox.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.ListBox.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.PasswordBox.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.RadioButton.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.RepeatButton.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.ScrollViewer.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.TextBox.xaml"/>
+				<ResourceDictionary Source="Resources/System.Windows.ToolTip.xaml"/>
+				<ResourceDictionary Source="Resources/TabControl.xaml"/>
+				<ResourceDictionary Source="Resources/TileView.xaml"/>
+				<ResourceDictionary Source="Resources/ToolBar.xaml"/>
+				<ResourceDictionary Source="Resources/TransitionControl.xaml"/>
+				<ResourceDictionary Source="Resources/TreeListViewRow.xaml"/>
+				<ResourceDictionary Source="Resources/TreeView.xaml"/>
+				<ResourceDictionary Source="Resources/WatermarkTextBox.xaml"/>
+				<ResourceDictionary Source="Resources/Window.xaml"/>
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>
