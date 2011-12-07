@@ -1,0 +1,4 @@
+This is a sample WPF app utlizing the Telerik RadControls 2011 Metro theme (demo)
+
+- I've revised the .xaml stylesheets to work out of the box on a standard WPF app
+- The app requires the .dll binary references for all of the Telerik components
